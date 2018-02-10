@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Discussion;
 use Auth;
+use App\Reply;
 
 class DiscussionController extends Controller
 {
@@ -97,5 +98,15 @@ class DiscussionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function reply($id){
+        Reply::create([
+            'user_id' => Auth::id(),
+            'discussion_id' => $id,
+            'content' => request()->content,
+        ]);
+
+        return redirect()->back();
     }
 }
