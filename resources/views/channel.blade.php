@@ -22,14 +22,12 @@
                 <div class="panel-footer">
                         @if ($item->replies->count()==1 || $item->replies->count()==0)
                             {{$item->replies->count()}} Reply 
-                            <a href = {{route('channel',['id' => $item->channel])}} class = "btn pull-right btn-info"> {{$item->channel->title}}</a>
                         @else
                             {{$item->replies->count()}}  Replies
-                            <a href = {{route('channel',['id' => $item->channel])}} class = "btn pull-right btn-info"> {{$item->channel->title}}</a>                            
                         @endif
                 </div>
             </div>
         @endforeach
-        <div class = 'text-center'>{{$discussion->links()}} </div>
+        {{--  <div class = 'text-center'>{{$discussion->links()}} </div>  --}}
             
 @endsection

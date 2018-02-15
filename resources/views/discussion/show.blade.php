@@ -52,14 +52,19 @@
 
 <div class="panel panel-default">
         <div class="panel-body">
+                @if (Auth::check())
                 <form action="{{route('discussions.reply',['id' => $item->id])}}" method = 'POST'>
-                        {{csrf_field()}}           
-                        <div class="form-group">
-                            <label for="text">Write Something Here..</label>
-                            <textarea rows = '10' cols = '30' type="text" class="form-control" id="text" name = 'content'></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-info pull-right">Submit</button>
-                      </form>    
+                                {{csrf_field()}}           
+                                <div class="form-group">
+                                    <label for="text">Write Something Here..</label>
+                                    <textarea rows = '10' cols = '30' type="text" class="form-control" id="text" name = 'content'></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-info pull-right">Submit</button>
+                 </form> 
+                @else
+                    <h1 class = "text-center">Sign In Please To Leave A Reply</h1>
+                @endif
+                   
         </div>
     </div>
 

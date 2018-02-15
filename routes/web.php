@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/forum', 'ForumController@index');
+Route::get('/forum', [
+    'uses' =>'ForumController@index',
+    'as' => 'forum']);
 
 Route::get('{authorize}/auth',[
 'uses' => 'SocialController@auth',
@@ -28,11 +30,15 @@ Route::get('{authorize}/redirect',[
 'uses' => 'SocialController@redirect',
 'as' => 'social.redirect'
 ]);
+Route::get('/channel/{id}',[
+    'uses' => 'ForumController@channel',
+    'as' => 'channel'
+]);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('channels', 'ChannelController');
     
-    Route::resource('discussions','DiscussionController');
+    Route::resource('discussions','DiscussionController',['except' => 'show']);
     Route::post('discussions/reply/{id}',[
        'uses' => 'DiscussionController@reply',
         'as'  =>  'discussions.reply'
@@ -45,4 +51,9 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'ReplyController@unlike',
         'as' => 'reply.unlike'
     ]);
+    
 });
+
+Route::get('discussions/{slug}',[
+    'uses' => 'DiscussionController@show',
+    'as' => 'discussions.show']);
