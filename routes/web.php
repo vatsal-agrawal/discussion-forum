@@ -37,4 +37,12 @@ Route::group(['middleware' => 'auth'], function () {
        'uses' => 'DiscussionController@reply',
         'as'  =>  'discussions.reply'
     ]);
+    Route::get('discussions/reply/like/{id}',[
+        'uses' => 'ReplyController@like',
+        'as' => 'reply.like'
+    ]);
+    Route::get('discussions/reply/unlike/{id}',[
+        'uses' => 'ReplyController@unlike',
+        'as' => 'reply.unlike'
+    ]);
 });
