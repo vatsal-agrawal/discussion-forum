@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notifications\NewReplyAdded;
 use App\Discussion;
+use App\User;
 use Auth;
 use App\Reply;
+use Notification;
+
 
 class DiscussionController extends Controller
 {
@@ -106,6 +110,15 @@ class DiscussionController extends Controller
             'discussion_id' => $id,
             'content' => request()->content,
         ]);
+
+        $d = Discussion::findOrFail($id);
+        $watchers = array();
+
+        foreach($d->watchers as $w){
+            array_push($watchers,User::findOrFail($w->user_id));
+        }
+
+        Notification::send($watchers,new NewReplyAdded());
 
         return redirect()->back();
     }
