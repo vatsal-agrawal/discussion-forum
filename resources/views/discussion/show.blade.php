@@ -6,9 +6,14 @@
         <div class="panel-heading"><img src="{{$item->user->avatar}}" width="40px" height = "40px" alt = "image not found"> 
         &nbsp;&nbsp;&nbsp;
         {{$item->user->name }} : <b>{{$item->created_at->diffForHumans()}}</b>
-        
-        
-        
+        @if (Auth::check())
+                @if ($item->is_being_watched_by_user())
+                        <a href ="{{route('discussions.unwatch',['id' => $item->id])}}" class = 'btn btn-default pull-right'>Unwatch</a>
+                @else
+                        <a href ="{{route('discussions.watch',['id' => $item->id])}}" class = 'btn btn-default pull-right'>Watch</a>    
+                @endif
+
+        @endif
         </div>
 
         <div class="panel-body">

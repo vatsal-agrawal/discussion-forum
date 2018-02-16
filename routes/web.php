@@ -51,6 +51,14 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'ReplyController@unlike',
         'as' => 'reply.unlike'
     ]);
+    Route::get('discussions/watch/{id}',[
+        'uses' => 'WatcherController@watch',
+        'as' => 'discussions.watch'
+    ]);
+    Route::get('discussions/unwatch/{id}',[
+        'uses' => 'WatcherController@unwatch',
+        'as' => 'discussions.unwatch'
+    ]);
     
 });
 
