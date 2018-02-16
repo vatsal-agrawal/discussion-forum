@@ -26,4 +26,11 @@ class ReplyController extends Controller
         return redirect()->back();
 
     }
+    public function best_reply($id){
+        $reply = Reply::findOrFail($id);
+        $reply->best_answer = 1;
+        $reply->save();
+
+        return redirect()->back();
+    }
 }

@@ -23,6 +23,23 @@
                 <p class="text-center">
                         {{$item->content}}
                 </p>
+                <hr>
+                @if ($best_answer)
+                <div class='panel panel-success'>
+                        <div class="panel-heading"><img src="{{$best_answer->user->avatar}}" width="40px" height = "40px" alt = "image not found"> 
+                                &nbsp;&nbsp;&nbsp;
+                                {{$best_answer->user->name}} : <b>{{$best_answer->created_at->diffForHumans()}}</b>
+                        </div>     
+                        <div class="panel-body">
+                                <p class="text-center">
+                                        {{$best_answer->content}}
+                                </p>
+                        </div>
+                </div>
+
+                @endif
+                        
+
         </div>
     </div>
 
@@ -32,6 +49,9 @@
         <div class="panel-heading"><img src="{{$r->user->avatar}}" width="40px" height = "40px" alt = "image not found"> 
         &nbsp;&nbsp;&nbsp;
         {{$r->user->name}} : <b>{{$item->created_at->diffForHumans()}}</b>
+        @if (!$best_answer)
+        <a href ="{{route('discussions.best.reply',['id' => $r->id])}}" class = "btn btn-xs btn-info pull-right">Mark this as best answer</a>
+        @endif
         
         
         

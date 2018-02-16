@@ -67,7 +67,12 @@ class DiscussionController extends Controller
      */
     public function show($slug)
     {
-        return view('discussion.show')->with('item',Discussion::where('slug',$slug)->first());
+        $discussion = Discussion::where('slug',$slug)->first();
+
+        $best_answer = $discussion->replies()->where('best_answer',1)->first();
+
+
+        return view('discussion.show')->with('item',$discussion)->with('best_answer',$best_answer);
     }
 
     /**
