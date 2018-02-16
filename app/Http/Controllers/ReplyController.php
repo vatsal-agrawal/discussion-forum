@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Reply;
 use App\Like;
 use Auth;
+use Session;
 
 class ReplyController extends Controller
 {
@@ -14,6 +15,7 @@ class ReplyController extends Controller
             'reply_id' => $id,
             'user_id' => Auth::id()
         ]);
+        Session::flash('success','Thanks for liking');
         return redirect()->back();
     }
     public function unlike($id){
