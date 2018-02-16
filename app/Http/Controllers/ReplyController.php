@@ -31,6 +31,9 @@ class ReplyController extends Controller
         $reply->best_answer = 1;
         $reply->save();
 
+        $reply->user->points +=75;
+        $reply->user->save();
+
         return redirect()->back();
     }
 }

@@ -5,7 +5,7 @@
         <div class="panel panel-default">
                 <div class="panel-heading"><img src="{{$item->user->avatar}}" width="40px" height = "40px" alt = "image not found"> 
                 &nbsp;&nbsp;&nbsp;
-                {{$item->user->name}} : <b>{{$item->created_at->diffForHumans()}}</b>
+                {{$item->user->name}} : <b>{{$item->user->points}}</b>
                 
                 <a href="{{route('discussions.show',['slug' => $item->slug])}}" class = "btn btn-primary pull-right">view</a>
                 

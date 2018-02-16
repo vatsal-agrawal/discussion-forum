@@ -5,14 +5,14 @@
 <div class="panel panel-default">
         <div class="panel-heading"><img src="{{$item->user->avatar}}" width="40px" height = "40px" alt = "image not found"> 
         &nbsp;&nbsp;&nbsp;
-        {{$item->user->name }} : <b>{{$item->created_at->diffForHumans()}}</b>
+        {{$item->user->name }} : <b>{{$item->user->points}}</b>
         @if (Auth::check())
+
                 @if ($item->is_being_watched_by_user())
                         <a href ="{{route('discussions.unwatch',['id' => $item->id])}}" class = 'btn btn-default pull-right'>Unwatch</a>
                 @else
                         <a href ="{{route('discussions.watch',['id' => $item->id])}}" class = 'btn btn-default pull-right'>Watch</a>    
                 @endif
-
         @endif
         </div>
 
@@ -25,18 +25,18 @@
                 </p>
                 <hr>
                 @if ($best_answer)
+                
                 <div class='panel panel-success'>
-                        <div class="panel-heading"><img src="{{$best_answer->user->avatar}}" width="40px" height = "40px" alt = "image not found"> 
-                                &nbsp;&nbsp;&nbsp;
-                                {{$best_answer->user->name}} : <b>{{$best_answer->created_at->diffForHumans()}}</b>
-                        </div>     
-                        <div class="panel-body">
-                                <p class="text-center">
-                                        {{$best_answer->content}}
-                                </p>
-                        </div>
-                </div>
-
+                                <div class="panel-heading"><img src="{{$best_answer->user->avatar}}" width="40px" height = "40px" alt = "image not found"> 
+                                        &nbsp;&nbsp;&nbsp;
+                                        {{$best_answer->user->name}} : <b>{{$best_answer->user->points}}</b>
+                                </div>     
+                                <div class="panel-body">
+                                        <p class="text-center">
+                                                {{$best_answer->content}}
+                                        </p>
+                                </div>
+                        </div>          
                 @endif
                         
 
@@ -45,17 +45,18 @@
 
 @foreach ($item->replies as $r)
 
+
 <div class="panel panel-default">
         <div class="panel-heading"><img src="{{$r->user->avatar}}" width="40px" height = "40px" alt = "image not found"> 
         &nbsp;&nbsp;&nbsp;
-        {{$r->user->name}} : <b>{{$item->created_at->diffForHumans()}}</b>
+        {{$r->user->name}} : <b>{{$r->user->points}}</b>
         @if (!$best_answer)
+        @if (Auth::id() == $item->user_id)
         <a href ="{{route('discussions.best.reply',['id' => $r->id])}}" class = "btn btn-xs btn-info pull-right">Mark this as best answer</a>
         @endif
-        
-        
-        
+        @endif
         </div>
+      
 
         <div class="panel-body">
                 <p class="text-center">

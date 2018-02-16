@@ -68,11 +68,15 @@ class DiscussionController extends Controller
     public function show($slug)
     {
         $discussion = Discussion::where('slug',$slug)->first();
+        if($discussion){
+            $best_answer = $discussion->replies()->where('best_answer',1)->first();
+             return view('discussion.show')->with('item',$discussion)->with('best_answer',$best_answer);            
+        }
+        else{
+            return view('discussion.show')->with('item',$discussion);                        
+        }
 
-        $best_answer = $discussion->replies()->where('best_answer',1)->first();
 
-
-        return view('discussion.show')->with('item',$discussion)->with('best_answer',$best_answer);
     }
 
     /**
@@ -110,11 +114,15 @@ class DiscussionController extends Controller
     }
 
     public function reply($id){
-        Reply::create([
-            'user_id' => Auth::id(),
-            'discussion_id' => $id,
-            'content' => request()->content,
-        ]);
+        $reply = Reply::create([
+                    'user_id' => Auth::id(),
+                    'discussion_id' => $id,
+                    'content' => request()->content,
+                ]);
+
+        $reply->user->points += 25;
+
+        $reply->user->save();
 
         $d = Discussion::findOrFail($id);
         $watchers = array();
