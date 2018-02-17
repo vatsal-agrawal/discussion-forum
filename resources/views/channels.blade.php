@@ -4,6 +4,9 @@
                     <div class="panel-body">
                                 <a href="{{route('forum')}}" class = "text-center">Forum</a>
                     </div>
+                    <div class="panel-body">
+                        <a href="{{route('discussions.my')}}" class = "text-center">My Discussions</a>
+                    </div>
             </div>
             
             

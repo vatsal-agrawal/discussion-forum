@@ -8,7 +8,8 @@
         {{$item->user->name }} : <b>{{$item->user->points}}</b>
         @if (Auth::check())
 
-                @if ($item->is_being_watched_by_user())
+                {{--  @if ($item->is_being_watched_by_user())  --}}
+                 @if ($item->watchers()->where('user_id',Auth::id())->first())
                         <a href ="{{route('discussions.unwatch',['id' => $item->id])}}" class = 'btn btn-default pull-right'>Unwatch</a>
                 @else
                         <a href ="{{route('discussions.watch',['id' => $item->id])}}" class = 'btn btn-default pull-right'>Watch</a>    
@@ -57,18 +58,27 @@
         @endif
         </div>
       
-
         <div class="panel-body">
                 <p class="text-center">
                         {{$r->content}}
                 </p>
-        </div>
+                </div>
         <div class="panel-footer">
-                @if ($r->is_liked_by_auth_user())
+                {{--  @if ($r->is_liked_by_auth_user())
                     <a href = "{{route('reply.unlike',['id' => $r->id])}}" class = 'btn btn-danger'>Unlike <span class = 'badge'> {{$r->likes->count()}}</span></a>
                 @else
                     <a href = "{{route('reply.like',['id' => $r->id])}}" class = 'btn btn-success'>Like <span class = 'badge'> {{$r->likes->count()}}</span></a>
-                @endif
+                @endif   --}}
+
+
+                        @if($r->likes()->where('user_id',Auth::id())->first())
+                        <a href = "{{route('reply.unlike',['id' => $r->id])}}" class = 'btn btn-danger'>Unlike <span class = 'badge'> {{$r->likes->count()}}</span></a>
+                        @else
+                        <a href = "{{route('reply.like',['id' => $r->id])}}" class = 'btn btn-success'>Like <span class = 'badge'> {{$r->likes->count()}}</span></a>
+                        @endif           
+
+
+
         </div>
     </div>
 
@@ -93,10 +103,5 @@
                    
         </div>
     </div>
-
-
-
-
-
 
 @endsection

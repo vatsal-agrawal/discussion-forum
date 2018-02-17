@@ -21,19 +21,20 @@ class Discussion extends Model
     public function watchers(){
         return $this->hasMany('App\Watcher');
     }
-    public function is_being_watched_by_user(){
-        $id = Auth::id();
+    // public function is_being_watched_by_user(){
+    //     $id = Auth::id();
 
-        $watches = array();
+    //     $watches = array();
 
-        foreach($this->watchers as $w){
-            array_push($watches,$w->user_id);
-        }
-        if(in_array($id,$watches)){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+    //     foreach($this->watchers as $w){
+    //         array_push($watches,$w->user_id);
+    //     }
+    //     if(in_array($id,$watches)){
+    //         return true;
+    //     }
+    //     else{
+    //         return false;
+    //     }
+    // }
+    // No use query already exists!!!!
 }

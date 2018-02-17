@@ -135,4 +135,8 @@ class DiscussionController extends Controller
 
         return redirect()->back();
     }
+    public function my_user(){
+        $discussions = Discussion::where('user_id',Auth::id())->paginate(1);
+        return view('forum',['discussion' => $discussions]);
+    }
 }

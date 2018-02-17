@@ -76,6 +76,7 @@
                 <div class="col-md-4">
                     <a href ="{{route('discussions.create')}}" class = 'btn btn-warning'  role = 'button' > Create a new Discussion</a>
                     <br><br>
+                    
                         @include('channels')
                         
                 </div>

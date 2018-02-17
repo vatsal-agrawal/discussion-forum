@@ -7,9 +7,9 @@ return [
     'table' => 'oauth_identities',
     'providers' => [
         'facebook' => [
-            'client_id' => '12345678',
-            'client_secret' => 'y0ur53cr374ppk3y',
-            'redirect_uri' => 'https://example.com/your/facebook/redirect',
+            'client_id' => '278273932704721',
+            'client_secret' => '30a6ca208229a9dd0b5926671512eb47',
+            'redirect_uri' => 'http://localhost:8080/discussion-forum/public/facebook/redirect',
             'scope' => [],
         ],
         'google' => [

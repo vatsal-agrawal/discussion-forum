@@ -8,6 +8,11 @@
                 {{$item->user->name}} : <b>{{$item->user->points}}</b>
                 
                 <a href="{{route('discussions.show',['slug' => $item->slug])}}" class = "btn btn-primary pull-right">view</a>
+               @if ($item->replies()->where('best_answer',1)->first())
+                        <button class="btn btn-danger mx-auto" style="margin-right:10px">Closed Discussion</button>
+               @else
+                        <button class="btn btn-success mx-auto" style="margin-right:10px">Open Discussion</button>    
+               @endif
                 
                 </div>
 

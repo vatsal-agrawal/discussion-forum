@@ -63,6 +63,10 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'ReplyController@best_reply',
         'as' => 'discussions.best.reply'
     ]);
+    Route::get('discussions/my',[
+        'uses' => 'DiscussionController@my_user',
+        'as' => 'discussions.my'
+    ]);
     
 });
 
