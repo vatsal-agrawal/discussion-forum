@@ -9,6 +9,12 @@
         @if (Auth::check())
 
                 {{--  @if ($item->is_being_watched_by_user())  --}}
+                @if ($item->user_id == Auth::id())
+                        <a href ="{{route('discussions.edit',['slug' => $item->slug])}}" class = 'btn btn-primary btn-xs pull-right'>Edit</a>  
+                @endif
+
+
+
                  @if ($item->watchers()->where('user_id',Auth::id())->first())
                         <a href ="{{route('discussions.unwatch',['id' => $item->id])}}" class = 'btn btn-default pull-right'>Unwatch</a>
                 @else
@@ -55,6 +61,9 @@
         @if (Auth::id() == $item->user_id)
         <a href ="{{route('discussions.best.reply',['id' => $r->id])}}" class = "btn btn-xs btn-info pull-right">Mark this as best answer</a>
         @endif
+        @endif
+        @if (!$best_answer && $r->user_id == Auth::id())
+        <a href ="{{route('reply.edit',['id' => $r->id])}}" class = "btn btn-xs btn-info pull-right" style='margin-right:10px;'>Edit</a>            
         @endif
         </div>
       

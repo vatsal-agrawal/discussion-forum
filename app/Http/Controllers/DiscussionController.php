@@ -85,9 +85,9 @@ class DiscussionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        return view('discussion.edit')->with('discussion',Discussion::where('slug',$slug)->first());
     }
 
     /**
@@ -99,7 +99,9 @@ class DiscussionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $discussion = Discussion::findorfail($id);
+        $discussion->update($request->all());
+        return redirect()->route('discussions.show',['slug'=>$discussion->slug]);
     }
 
     /**
@@ -134,9 +136,5 @@ class DiscussionController extends Controller
         Notification::send($watchers,new NewReplyAdded());
 
         return redirect()->back();
-    }
-    public function my_user(){
-        $discussions = Discussion::where('user_id',Auth::id())->paginate(1);
-        return view('forum',['discussion' => $discussions]);
     }
 }

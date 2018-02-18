@@ -38,4 +38,13 @@ class ReplyController extends Controller
 
         return redirect()->back();
     }
+    public function edit($id){
+        return view('reply.edit')->with('reply',Reply::findorfail($id));
+    }
+    public function update($id){
+        $reply = Reply::findOrFail($id);
+        $reply->content = request()->content;
+        $reply->save();
+        return redirect()->route('discussions.show',['slug'=>$reply->discussion->slug]);
+    }
 }

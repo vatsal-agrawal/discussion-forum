@@ -63,9 +63,13 @@ Route::group(['middleware' => 'auth'], function () {
         'uses' => 'ReplyController@best_reply',
         'as' => 'discussions.best.reply'
     ]);
-    Route::get('discussions/my',[
-        'uses' => 'DiscussionController@my_user',
-        'as' => 'discussions.my'
+    Route::get('reply/edit/{id}',[
+        'uses' => 'ReplyController@edit',
+        'as' => 'reply.edit'
+    ]);
+    Route::post('reply/update/{id}',[
+        'uses' => 'ReplyController@update',
+        'as' => 'reply.update'
     ]);
     
 });

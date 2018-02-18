@@ -2,10 +2,16 @@
             <div class="panel panel-default">
 
                     <div class="panel-body">
-                                <a href="{{route('forum')}}" class = "text-center">Forum</a>
+                                <a href="/discussion-forum/public/forum" class = "text-center">Forum</a>
                     </div>
                     <div class="panel-body">
-                        <a href="{{route('discussions.my')}}" class = "text-center">My Discussions</a>
+                        <a href="/discussion-forum/public/forum?filter=me" class = "text-center">My Discussions</a>
+                    </div>
+                    <div class="panel-body">
+                        <a href="/discussion-forum/public/forum?filter=answered" class = "text-center">Answered Discussions</a>
+                    </div>
+                    <div class="panel-body">
+                        <a href="/discussion-forum/public/forum?filter=unanswered" class = "text-center">Unanswered Discussions</a>
                     </div>
             </div>
             
