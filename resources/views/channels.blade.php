@@ -13,6 +13,14 @@
                     <div class="panel-body">
                         <a href="/discussion-forum/public/forum?filter=unanswered" class = "text-center">Unanswered Discussions</a>
                     </div>
+                    @if (Auth::check())
+                    @if (Auth::user()->admin)
+                    <div class="panel-body">
+                        <a href="/discussion-forum/public/channels" class = "text-center">Channels</a>
+                    </div>
+                    @endif      
+                    @endif
+                    
             </div>
             
             

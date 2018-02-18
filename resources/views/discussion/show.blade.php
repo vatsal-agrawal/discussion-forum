@@ -28,7 +28,7 @@
                         {{$item->title}}
                 </h3>
                 <p class="text-center">
-                        {{$item->content}}
+                        {!! Markdown::convertToHtml($item->content) !!}
                 </p>
                 <hr>
                 @if ($best_answer)
@@ -63,7 +63,7 @@
         @endif
         @endif
         @if (!$best_answer && $r->user_id == Auth::id())
-        <a href ="{{route('reply.edit',['id' => $r->id])}}" class = "btn btn-xs btn-info pull-right" style='margin-right:10px;'>Edit</a>            
+        <a href ="{{route('reply.edit',['id' => $r->id])}}" class = "btn btn-xs btn-info pull-right" style='margin-right:10px'>Edit</a>            
         @endif
         </div>
       
